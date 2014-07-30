@@ -9,7 +9,7 @@ import (
 // DB represents a connection to the DB and allows you to run queriedb.
 type DB struct {
 	Session     *r.Session
-	collections *[]Collection
+	collections []*Collection
 }
 
 // Connect establishes connection with rethinkDB
@@ -30,14 +30,20 @@ func Connect(address, database string) (DB, error) {
 	return db, nil
 }
 
-// NewFromSession returns a new DB from an existing gorethink session.
-func NewFromSession(session *r.Session) DB {
+// NewDBFromSession returns a new DB from an existing gorethink session.
+func NewDBFromSession(session *r.Session) DB {
 	return DB{Session: session}
 }
 
 // NewCollection returns a new collection with the db set.
 func (db *DB) NewCollection(name string) *Collection {
-	return &Collection{r.Table(name), db}
+	c := &Collection{r.Table(name), db}
+	db.collections = append(db.collections, c)
+	return c
+}
+
+func (db *DB) CreateTables() error {
+	return nil
 }
 
 // RunWrite will run a query for the current session.
@@ -59,4 +65,19 @@ func (db *DB) Run(term r.Term) (*r.Cursor, error) {
 	}
 
 	return cursor, nil
+}
+
+// All will run a query and return the results scanned into an interface.
+func (db *DB) All(i interface{}, term r.Term) error {
+	cursor, err := db.Run(term)
+	if err != nil {
+		return err
+	}
+
+	err = cursor.All(i)
+	if err != nil {
+		return err
+	}
+
+	return nil
 }

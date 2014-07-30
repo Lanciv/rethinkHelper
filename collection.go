@@ -52,16 +52,16 @@ func (c *Collection) One(i interface{}, id string) error {
 }
 
 // All will run a query and return the results scanned into an interface.
-func (c *Collection) All(i interface{}) error {
-	cursor, err := c.db.Run(c.Term)
-	if err != nil {
-		return err
-	}
-
-	err = cursor.All(i)
-	if err != nil {
-		return err
-	}
-
-	return nil
-}
+// func (c *Collection) All(i interface{}, query r.Term) error {
+// 	cursor, err := c.db.Run(c.Term)
+// 	if err != nil {
+// 		return err
+// 	}
+//
+// 	err = cursor.All(i)
+// 	if err != nil {
+// 		return err
+// 	}
+//
+// 	return nil
+// }
