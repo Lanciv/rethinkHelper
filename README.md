@@ -2,6 +2,8 @@ RethinkHelper
 ============
 A helper to make it easier to use gorethink.
 
+[![wercker status](https://app.wercker.com/status/71ceee02fbdb9665d5af55aa3a855e31/m "wercker status")](https://app.wercker.com/project/bykey/71ceee02fbdb9665d5af55aa3a855e31)
+
 # Usage
 
 ```
