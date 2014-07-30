@@ -1,10 +1,6 @@
 package rethink
 
-import (
-	"time"
-
-	r "github.com/dancannon/gorethink"
-)
+import r "github.com/dancannon/gorethink"
 
 // DB represents a connection to the DB and allows you to run queriedb.
 type DB struct {
@@ -13,16 +9,17 @@ type DB struct {
 }
 
 // Connect establishes connection with rethinkDB
-func Connect(address, database string) (DB, error) {
+func Connect(connectOpts r.ConnectOpts) (DB, error) {
 
 	var err error
 	db := DB{}
-	db.Session, err = r.Connect(r.ConnectOpts{
-		Address:     address,
-		Database:    database,
-		MaxIdle:     10,
-		IdleTimeout: time.Second * 10,
-	})
+	// db.Session, err = r.Connect(r.ConnectOpts{
+	// 	Address:     address,
+	// 	Database:    database,
+	// 	MaxIdle:     10,
+	// 	IdleTimeout: time.Second * 10,
+	// })
+	db.Session, err = r.Connect(connectOpts)
 	if err != nil {
 		return db, err
 	}

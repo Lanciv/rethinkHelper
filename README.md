@@ -1,6 +1,9 @@
 RethinkHelper
 ============
-A helper to make it easier to use gorethink.
+A helper to make it a little easier to use gorethink.
+
+I am sure there are a lot of problems with this package.
+Also the API will change a lot until I am happy with how everything works.
 
 [![wercker status](https://app.wercker.com/status/71ceee02fbdb9665d5af55aa3a855e31/m "wercker status")](https://app.wercker.com/project/bykey/71ceee02fbdb9665d5af55aa3a855e31)
 

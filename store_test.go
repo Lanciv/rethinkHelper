@@ -1,12 +1,37 @@
 package rethink
 
-import "testing"
+import (
+	"os"
+	"testing"
 
-var db DB
+	r "github.com/dancannon/gorethink"
+)
+
+var (
+	db      DB
+	url     string
+	authKey string
+)
+
+func init() {
+	// Needed for wercker. By default url is "localhost:28015"
+	url = os.Getenv("RETHINKDB_URL")
+	if url == "" {
+		url = "localhost:28015"
+	}
+
+	// Needed for running tests for RethinkDB with a non-empty authkey
+	authKey = os.Getenv("RETHINKDB_AUTHKEY")
+}
 
 func TestConnect(t *testing.T) {
 	var err error
-	db, err = Connect("localhost:28015", "test")
+
+	db, err = Connect(r.ConnectOpts{
+		Address:  url,
+		AuthKey:  authKey,
+		Database: "test",
+	})
 
 	if err != nil {
 		t.Errorf("expected nil error but got %s", err)
@@ -31,5 +56,4 @@ func TestNewCollection(t *testing.T) {
 	if db.collections[0] != TestCollection {
 		t.Errorf("collections should have TestCollection")
 	}
-
 }
