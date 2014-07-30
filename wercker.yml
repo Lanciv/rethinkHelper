@@ -19,14 +19,14 @@ build:
           go version
           go get -t ./...
 
-      # Build the project
-      - script:
-          name: build
-          code: |
-            go build ./...
+    # Build the project
+    - script:
+        name: build
+        code: |
+          go build ./...
 
-      # Test the project
-      - script:
-          name: test
-          code: |
-            go test -test.v=true ./...
+    # Test the project
+    - script:
+        name: test
+        code: |
+          go test -test.v=true ./...
