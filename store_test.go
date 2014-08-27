@@ -38,7 +38,7 @@ func TestConnect(t *testing.T) {
 	}
 
 	if len(db.collections) != 0 {
-		t.Errorf("new DB should not have any collections.")
+		t.Error("new DB should not have any collections.")
 	}
 }
 
@@ -46,14 +46,14 @@ func TestNewCollection(t *testing.T) {
 	TestCollection := db.NewCollection("test")
 
 	if TestCollection.db != &db {
-		t.Errorf("expected TestCollection.db to equal global DB")
+		t.Error("expected TestCollection.db to equal global DB")
 	}
 
 	if len(db.collections) != 1 {
-		t.Errorf("new DB should have one collection.")
+		t.Error("new DB should have one collection.")
 	}
 
 	if db.collections[0] != TestCollection {
-		t.Errorf("collections should have TestCollection")
+		t.Error("collections should have TestCollection")
 	}
 }

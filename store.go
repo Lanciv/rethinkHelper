@@ -1,6 +1,10 @@
 package rethink
 
-import r "github.com/dancannon/gorethink"
+import (
+	"errors"
+
+	r "github.com/dancannon/gorethink"
+)
 
 // DB represents a connection to the DB and allows you to run queriedb.
 type DB struct {
@@ -39,8 +43,9 @@ func (db *DB) NewCollection(name string) *Collection {
 	return c
 }
 
+// CreateTables will create all tables in rethinkdb
 func (db *DB) CreateTables() error {
-	return nil
+	return errors.New("not implemented")
 }
 
 // RunWrite will run a query for the current session.
